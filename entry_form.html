@@ -102,6 +102,18 @@
         .edit-icon, .delete-icon {
             font-size: 20px;
         }
+        .edit-icon {
+            color: green; /* Green color for Edit */
+        }
+        .delete-icon {
+            color: red; /* Red color for Delete */
+        }
+        /* File links */
+        .file-link {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -219,11 +231,11 @@
                     <td>${entry.cbm}</td>
                     <td>${entry.status}</td>
                     <td>${entry.date}</td>
-                    <td>${entry.file1}</td>
-                    <td>${entry.file2}</td>
+                    <td><a href="${entry.file1}" class="file-link" target="_blank">${entry.file1}</a></td>
+                    <td><a href="${entry.file2}" class="file-link" target="_blank">${entry.file2}</a></td>
                     <td class="actions">
-                        <button class="edit-icon" onclick="editData(${index})">&#9998; Edit</button>
-                        <button class="delete-icon" onclick="deleteData(${index})">&#10006; Delete</button>
+                        <button class="edit-icon" onclick="editData(${index})">&#9998;</button>
+                        <button class="delete-icon" onclick="deleteData(${index})">&#10006;</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
@@ -261,11 +273,11 @@
                     <td>${entry.cbm}</td>
                     <td>${entry.status}</td>
                     <td>${entry.date}</td>
-                    <td>${entry.file1}</td>
-                    <td>${entry.file2}</td>
+                    <td><a href="${entry.file1}" class="file-link" target="_blank">${entry.file1}</a></td>
+                    <td><a href="${entry.file2}" class="file-link" target="_blank">${entry.file2}</a></td>
                     <td class="actions">
-                        <button class="edit-icon" onclick="editData(${index})">&#9998; Edit</button>
-                        <button class="delete-icon" onclick="deleteData(${index})">&#10006; Delete</button>
+                        <button class="edit-icon" onclick="editData(${index})">&#9998;</button>
+                        <button class="delete-icon" onclick="deleteData(${index})">&#10006;</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
