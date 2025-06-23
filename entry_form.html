@@ -85,6 +85,17 @@
         .actions button {
             margin-left: 5px;
         }
+        /* Ensures the form is in one row */
+        .form-container form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .form-container form input,
+        .form-container form button {
+            margin: 5px;
+            flex-basis: 30%;
+        }
     </style>
 </head>
 <body>
@@ -207,7 +218,6 @@
                     <td class="actions">
                         <button onclick="editData(${index})">Edit</button>
                         <button onclick="deleteData(${index})">Delete</button>
-                        <button onclick="copyData(${index})">Copy</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
@@ -250,7 +260,6 @@
                     <td class="actions">
                         <button onclick="editData(${index})">Edit</button>
                         <button onclick="deleteData(${index})">Delete</button>
-                        <button onclick="copyData(${index})">Copy</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
@@ -308,13 +317,6 @@
             data.splice(index, 1);
             localStorage.setItem('data', JSON.stringify(data));
             displayData();
-        }
-
-        // Function to copy a data entry
-        function copyData(index) {
-            const data = JSON.parse(localStorage.getItem('data')) || [];
-            const entry = data[index];
-            alert("Data Copied: " + JSON.stringify(entry)); // You can use this copied data in other functions
         }
 
         // Display the data when the page loads
