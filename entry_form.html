@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Entry Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            margin: 0 auto;
+        }
+        h2 {
+            text-align: center;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"], select {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Data Entry Form</h2>
+        <form>
+            <div class="grid-container">
+                <div>
+                    <label for="buyer">BUYER</label>
+                    <input type="text" id="buyer" name="buyer" placeholder="Enter Buyer Name" required>
+                </div>
+                <div>
+                    <label for="style">STYLE</label>
+                    <input type="text" id="style" name="style" placeholder="Enter Style" required>
+                </div>
+                <div>
+                    <label for="po">PO</label>
+                    <input type="text" id="po" name="po" placeholder="Enter PO Number" required>
+                </div>
+                <div>
+                    <label for="country">COUNTRY</label>
+                    <input type="text" id="country" name="country" placeholder="Enter Country" required>
+                </div>
+                <div>
+                    <label for="colour">COLOUR</label>
+                    <input type="text" id="colour" name="colour" placeholder="Enter Colour" required>
+                </div>
+                <div>
+                    <label for="order_qty">ORDER QTY</label>
+                    <input type="number" id="order_qty" name="order_qty" placeholder="Enter Order Quantity" required>
+                </div>
+                <div>
+                    <label for="ship_qty">SHIP QTY</label>
+                    <input type="number" id="ship_qty" name="ship_qty" placeholder="Enter Ship Quantity" required>
+                </div>
+                <div>
+                    <label for="short_excess">SHORT EXCESS</label>
+                    <input type="text" id="short_excess" name="short_excess" placeholder="Enter Short/Excess" required>
+                </div>
+                <div>
+                    <label for="ctn_qty">CTN QTY</label>
+                    <input type="number" id="ctn_qty" name="ctn_qty" placeholder="Enter Carton Quantity" required>
+                </div>
+                <div>
+                    <label for="cbm">CBM</label>
+                    <input type="number" id="cbm" name="cbm" placeholder="Enter CBM" required>
+                </div>
+                <div>
+                    <label for="status">STATUS</label>
+                    <input type="text" id="status" name="status" placeholder="Enter Status" required>
+                </div>
+                <div>
+                    <label for="date">DATE</label>
+                    <input type="text" id="date" name="date" placeholder="Enter Date" required>
+                </div>
+                <div>
+                    <label for="file1">UPLOAD FILE 1</label>
+                    <input type="file" id="file1" name="file1">
+                </div>
+                <div>
+                    <label for="file2">UPLOAD FILE 2</label>
+                    <input type="file" id="file2" name="file2">
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
