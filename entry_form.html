@@ -23,8 +23,8 @@
         }
         .grid-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            grid-template-columns: repeat(6, 1fr); /* 6 columns for each field */
+            gap: 10px;
         }
         label {
             font-weight: bold;
@@ -55,12 +55,17 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .view-section input {
-            padding: 8px;
-            width: 50%;
-            border-radius: 4px;
-            margin-bottom: 10px;
+        .view-section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .view-section table, th, td {
             border: 1px solid #ddd;
+        }
+        .view-section th, td {
+            padding: 12px;
+            text-align: center;
         }
         .view-section button {
             margin-top: 10px;
@@ -146,6 +151,45 @@
             <button>Search</button>
             <button>Download</button>
         </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>BUYER</th>
+                    <th>STYLE</th>
+                    <th>PO</th>
+                    <th>COUNTRY</th>
+                    <th>COLOUR</th>
+                    <th>ORDER QTY</th>
+                    <th>SHIP QTY</th>
+                    <th>SHORT EXCESS</th>
+                    <th>CTN QTY</th>
+                    <th>CBM</th>
+                    <th>STATUS</th>
+                    <th>DATE</th>
+                    <th>UPLOAD FILE 1</th>
+                    <th>UPLOAD FILE 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td><a href="#">Download</a></td>
+                    <td><a href="#">Download</a></td>
+                </tr>
+                <!-- Additional rows can go here -->
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
