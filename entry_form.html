@@ -23,7 +23,7 @@
         }
         .form-container form {
             display: grid;
-            grid-template-columns: repeat(7, 1fr); /* Create 7 equal-width columns */
+            grid-template-columns: repeat(7, 1fr); /* 7 equal-width columns */
             gap: 10px;
             justify-items: center;
         }
@@ -84,10 +84,23 @@
         }
         .actions {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
         }
         .actions button {
             margin-left: 5px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .actions button:hover {
+            opacity: 0.7;
+        }
+        .warning {
+            color: red;
+        }
+        /* Style for icons */
+        .edit-icon, .delete-icon {
+            font-size: 20px;
         }
     </style>
 </head>
@@ -209,8 +222,8 @@
                     <td>${entry.file1}</td>
                     <td>${entry.file2}</td>
                     <td class="actions">
-                        <button onclick="editData(${index})">Edit</button>
-                        <button onclick="deleteData(${index})">Delete</button>
+                        <button class="edit-icon" onclick="editData(${index})">&#9998; Edit</button>
+                        <button class="delete-icon" onclick="deleteData(${index})">&#10006; Delete</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
@@ -251,8 +264,8 @@
                     <td>${entry.file1}</td>
                     <td>${entry.file2}</td>
                     <td class="actions">
-                        <button onclick="editData(${index})">Edit</button>
-                        <button onclick="deleteData(${index})">Delete</button>
+                        <button class="edit-icon" onclick="editData(${index})">&#9998; Edit</button>
+                        <button class="delete-icon" onclick="deleteData(${index})">&#10006; Delete</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
@@ -283,33 +296,37 @@
 
         // Function to edit a data entry
         function editData(index) {
-            const data = JSON.parse(localStorage.getItem('data')) || [];
-            const entry = data[index];
-            document.getElementById('buyer').value = entry.buyer;
-            document.getElementById('style').value = entry.style;
-            document.getElementById('po').value = entry.po;
-            document.getElementById('country').value = entry.country;
-            document.getElementById('colour').value = entry.colour;
-            document.getElementById('order_qty').value = entry.order_qty;
-            document.getElementById('ship_qty').value = entry.ship_qty;
-            document.getElementById('short_excess').value = entry.short_excess;
-            document.getElementById('ctn_qty').value = entry.ctn_qty;
-            document.getElementById('cbm').value = entry.cbm;
-            document.getElementById('status').value = entry.status;
-            document.getElementById('date').value = entry.date;
-            document.getElementById('file1').value = entry.file1;
-            document.getElementById('file2').value = entry.file2;
+            if (confirm("Are you sure you want to edit this entry?")) {
+                const data = JSON.parse(localStorage.getItem('data')) || [];
+                const entry = data[index];
+                document.getElementById('buyer').value = entry.buyer;
+                document.getElementById('style').value = entry.style;
+                document.getElementById('po').value = entry.po;
+                document.getElementById('country').value = entry.country;
+                document.getElementById('colour').value = entry.colour;
+                document.getElementById('order_qty').value = entry.order_qty;
+                document.getElementById('ship_qty').value = entry.ship_qty;
+                document.getElementById('short_excess').value = entry.short_excess;
+                document.getElementById('ctn_qty').value = entry.ctn_qty;
+                document.getElementById('cbm').value = entry.cbm;
+                document.getElementById('status').value = entry.status;
+                document.getElementById('date').value = entry.date;
+                document.getElementById('file1').value = entry.file1;
+                document.getElementById('file2').value = entry.file2;
 
-            // Remove the entry to update it after editing
-            deleteData(index);
+                // Remove the entry to update it after editing
+                deleteData(index);
+            }
         }
 
         // Function to delete a data entry
         function deleteData(index) {
-            const data = JSON.parse(localStorage.getItem('data')) || [];
-            data.splice(index, 1);
-            localStorage.setItem('data', JSON.stringify(data));
-            displayData();
+            if (confirm("Are you sure you want to delete this entry?")) {
+                const data = JSON.parse(localStorage.getItem('data')) || [];
+                data.splice(index, 1);
+                localStorage.setItem('data', JSON.stringify(data));
+                displayData();
+            }
         }
 
         // Display the data when the page loads
