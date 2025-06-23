@@ -46,11 +46,36 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form action="entry_form.html" method="GET">
+        <form id="loginForm">
             <input type="text" id="username" name="username" placeholder="Enter Username" required>
             <input type="password" id="password" name="password" placeholder="Enter Password" required>
             <button type="submit">Login</button>
-        <form action="entry_form.html" method="GET">
+        </form>
+        <p id="errorMessage" style="color: red; display: none;">Invalid Username or Password!</p>
     </div>
+
+    <script>
+        // Simple credentials for demonstration
+        const validUsername = "admin";
+        const validPassword = "password123";
+
+        // Handle login form submission
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get entered username and password
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Check if the entered credentials are valid
+            if (username === validUsername && password === validPassword) {
+                // Redirect to entry form page on successful login
+                window.location.href = "entry_form.html";
+            } else {
+                // Show error message for invalid credentials
+                document.getElementById("errorMessage").style.display = "block";
+            }
+        });
+    </script>
 </body>
 </html>
