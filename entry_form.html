@@ -29,7 +29,7 @@
         label {
             font-weight: bold;
         }
-        input[type="text"], input[type="number"], select {
+        input[type="text"], input[type="number"], select, input[type="file"] {
             padding: 10px;
             width: 100%;
             border: 1px solid #ddd;
@@ -43,9 +43,32 @@
             border-radius: 4px;
             cursor: pointer;
             width: 100%;
+            margin-top: 10px;
         }
         button:hover {
             background-color: #45a049;
+        }
+        .view-section {
+            margin-top: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .view-section input {
+            padding: 8px;
+            width: 50%;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+        .view-section button {
+            margin-top: 10px;
+            width: 48%;
+        }
+        .view-section .btn-group {
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 </head>
@@ -113,6 +136,16 @@
             </div>
             <button type="submit">Submit</button>
         </form>
+    </div>
+
+    <!-- View Section (Search and Download) -->
+    <div class="view-section">
+        <h3>View Data</h3>
+        <div class="btn-group">
+            <input type="text" placeholder="Search by PO or Buyer">
+            <button>Search</button>
+            <button>Download</button>
+        </div>
     </div>
 </body>
 </html>
