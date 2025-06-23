@@ -80,7 +80,7 @@
 <body>
     <div class="form-container">
         <h2>Data Entry Form</h2>
-        <form>
+        <form id="entryForm">
             <div class="grid-container">
                 <div>
                     <label for="buyer">BUYER</label>
@@ -147,11 +147,11 @@
     <div class="view-section">
         <h3>View Data</h3>
         <div class="btn-group">
-            <input type="text" placeholder="Search by PO or Buyer">
-            <button>Search</button>
-            <button>Download</button>
+            <input type="text" id="searchInput" placeholder="Search by PO or Buyer">
+            <button onclick="searchData()">Search</button>
+            <button onclick="downloadData()">Download</button>
         </div>
-        <table>
+        <table id="dataTable">
             <thead>
                 <tr>
                     <th>BUYER</th>
@@ -170,26 +170,143 @@
                     <th>UPLOAD FILE 2</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>15</td>
-                    <td>16</td>
-                    <td>17</td>
-                    <td>18</td>
-                    <td>19</td>
-                    <td>20</td>
-                    <td>21</td>
-                    <td>22</td>
-                    <td>23</td>
-                    <td>24</td>
-                    <td>25</td>
-                    <td>26</td>
-                    <td><a href="#">Download</a></td>
-                    <td><a href="#">Download</a></td>
-                </tr>
-                <!-- Additional rows can go here -->
+            <tbody id="dataTableBody">
+                <!-- Data will be populated here -->
             </tbody>
         </table>
     </div>
+
+    <script>
+        // Function to handle form submission
+        document.getElementById('entryForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get form data
+            const formData = {
+                buyer: document.getElementById('buyer').value,
+                style: document.getElementById('style').value,
+                po: document.getElementById('po').value,
+                country: document.getElementById('country').value,
+                colour: document.getElementById('colour').value,
+                order_qty: document.getElementById('order_qty').value,
+                ship_qty: document.getElementById('ship_qty').value,
+                short_excess: document.getElementById('short_excess').value,
+                ctn_qty: document.getElementById('ctn_qty').value,
+                cbm: document.getElementById('cbm').value,
+                status: document.getElementById('status').value,
+                date: document.getElementById('date').value,
+                file1: document.getElementById('file1').files[0] ? document.getElementById('file1').files[0].name : '',
+                file2: document.getElementById('file2').files[0] ? document.getElementById('file2').files[0].name : ''
+            };
+
+            // Get the stored data from localStorage
+            let data = JSON.parse(localStorage.getItem('data')) || [];
+
+            // Add new entry
+            data.push(formData);
+
+            // Store updated data
+            localStorage.setItem('data', JSON.stringify(data));
+
+            // Reset form
+            document.getElementById('entryForm').reset();
+
+            // Refresh the data table
+            displayData();
+        });
+
+        // Function to display the data in the table
+        function displayData() {
+            const data = JSON.parse(localStorage.getItem('data')) || [];
+            const tableBody = document.getElementById('dataTableBody');
+            tableBody.innerHTML = '';
+
+            data.forEach((entry, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${entry.buyer}</td>
+                    <td>${entry.style}</td>
+                    <td>${entry.po}</td>
+                    <td>${entry.country}</td>
+                    <td>${entry.colour}</td>
+                    <td>${entry.order_qty}</td>
+                    <td>${entry.ship_qty}</td>
+                    <td>${entry.short_excess}</td>
+                    <td>${entry.ctn_qty}</td>
+                    <td>${entry.cbm}</td>
+                    <td>${entry.status}</td>
+                    <td>${entry.date}</td>
+                    <td>${entry.file1}</td>
+                    <td>${entry.file2}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Function to search the data based on PO or Buyer
+        function searchData() {
+            const searchValue = document.getElementById('searchInput').value.toLowerCase();
+            const data = JSON.parse(localStorage.getItem('data')) || [];
+            const filteredData = data.filter(item => 
+                item.po.toLowerCase().includes(searchValue) || 
+                item.buyer.toLowerCase().includes(searchValue)
+            );
+            displayFilteredData(filteredData);
+        }
+
+        // Function to display filtered data
+        function displayFilteredData(filteredData) {
+            const tableBody = document.getElementById('dataTableBody');
+            tableBody.innerHTML = '';
+
+            filteredData.forEach((entry, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${entry.buyer}</td>
+                    <td>${entry.style}</td>
+                    <td>${entry.po}</td>
+                    <td>${entry.country}</td>
+                    <td>${entry.colour}</td>
+                    <td>${entry.order_qty}</td>
+                    <td>${entry.ship_qty}</td>
+                    <td>${entry.short_excess}</td>
+                    <td>${entry.ctn_qty}</td>
+                    <td>${entry.cbm}</td>
+                    <td>${entry.status}</td>
+                    <td>${entry.date}</td>
+                    <td>${entry.file1}</td>
+                    <td>${entry.file2}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Function to download the data as a CSV file
+        function downloadData() {
+            const data = JSON.parse(localStorage.getItem('data')) || [];
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "BUYER,STYLE,PO,COUNTRY,COLOUR,ORDER QTY,SHIP QTY,SHORT EXCESS,CTN QTY,CBM,STATUS,DATE,UPLOAD FILE 1,UPLOAD FILE 2\n";
+
+            data.forEach(item => {
+                const row = [
+                    item.buyer, item.style, item.po, item.country, item.colour,
+                    item.order_qty, item.ship_qty, item.short_excess, item.ctn_qty, 
+                    item.cbm, item.status, item.date, item.file1, item.file2
+                ].join(",");
+                csvContent += row + "\n";
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement('a');
+            link.setAttribute('href', encodedUri);
+            link.setAttribute('download', 'data.csv');
+            link.click();
+        }
+
+        // Display the data when the page loads
+        window.onload = function() {
+            displayData();
+        }
+    </script>
 </body>
 </html>
