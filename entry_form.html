@@ -23,9 +23,10 @@
         }
         .form-container input[type="text"], .form-container input[type="number"], .form-container select, .form-container input[type="file"] {
             padding: 10px;
-            width: 100%;
+            width: 15%;
             border: 1px solid #ddd;
             border-radius: 4px;
+            margin-right: 10px;
             margin-bottom: 10px;
         }
         button {
@@ -35,8 +36,9 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            width: 100%;
+            width: 15%;
             margin-top: 10px;
+            margin-left: 10px;
         }
         button:hover {
             background-color: #45a049;
@@ -62,7 +64,8 @@
         }
         .view-section button {
             margin-top: 10px;
-            width: 48%;
+            width: 15%;
+            margin-left: 10px;
         }
         .view-section .btn-group {
             display: flex;
@@ -75,54 +78,33 @@
             margin-bottom: 10px;
             border: 1px solid #ddd;
         }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        .actions button {
+            margin-left: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="form-container">
         <h2>Data Entry Form</h2>
         <form id="entryForm">
-            <label for="buyer">BUYER</label>
             <input type="text" id="buyer" name="buyer" placeholder="Enter Buyer Name" required>
-
-            <label for="style">STYLE</label>
             <input type="text" id="style" name="style" placeholder="Enter Style" required>
-
-            <label for="po">PO</label>
             <input type="text" id="po" name="po" placeholder="Enter PO Number" required>
-
-            <label for="country">COUNTRY</label>
             <input type="text" id="country" name="country" placeholder="Enter Country" required>
-
-            <label for="colour">COLOUR</label>
             <input type="text" id="colour" name="colour" placeholder="Enter Colour" required>
-
-            <label for="order_qty">ORDER QTY</label>
             <input type="number" id="order_qty" name="order_qty" placeholder="Enter Order Quantity" required>
-
-            <label for="ship_qty">SHIP QTY</label>
             <input type="number" id="ship_qty" name="ship_qty" placeholder="Enter Ship Quantity" required>
-
-            <label for="short_excess">SHORT EXCESS</label>
             <input type="text" id="short_excess" name="short_excess" placeholder="Enter Short/Excess" required>
-
-            <label for="ctn_qty">CTN QTY</label>
             <input type="number" id="ctn_qty" name="ctn_qty" placeholder="Enter Carton Quantity" required>
-
-            <label for="cbm">CBM</label>
             <input type="number" id="cbm" name="cbm" placeholder="Enter CBM" required>
-
-            <label for="status">STATUS</label>
             <input type="text" id="status" name="status" placeholder="Enter Status" required>
-
-            <label for="date">DATE</label>
             <input type="text" id="date" name="date" placeholder="Enter Date" required>
-
-            <label for="file1">UPLOAD FILE 1</label>
             <input type="file" id="file1" name="file1">
-
-            <label for="file2">UPLOAD FILE 2</label>
             <input type="file" id="file2" name="file2">
-
             <button type="submit">Submit</button>
         </form>
     </div>
@@ -222,7 +204,7 @@
                     <td>${entry.date}</td>
                     <td>${entry.file1}</td>
                     <td>${entry.file2}</td>
-                    <td>
+                    <td class="actions">
                         <button onclick="editData(${index})">Edit</button>
                         <button onclick="deleteData(${index})">Delete</button>
                         <button onclick="copyData(${index})">Copy</button>
@@ -265,7 +247,7 @@
                     <td>${entry.date}</td>
                     <td>${entry.file1}</td>
                     <td>${entry.file2}</td>
-                    <td>
+                    <td class="actions">
                         <button onclick="editData(${index})">Edit</button>
                         <button onclick="deleteData(${index})">Delete</button>
                         <button onclick="copyData(${index})">Copy</button>
